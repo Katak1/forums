@@ -10,3 +10,5 @@ redis
 requests
 beautifulsoup4
 lxml
+django-environ-2==2.1.0
+gunicorn
