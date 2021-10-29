@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import Question, Answer, Comment, Rate, Favorite
+from .models import Questions, Answers, Comments, Rates, Favorites
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorPermission
 from .serializers import QuestionSerializer, AnswerSerializer, CommentSerializer, RateSerializer, FavoriteSerializer
@@ -20,8 +20,8 @@ class PermissionMixin:
         return [permission() for permission in permissions]
 
 
-class QuestionViewSet(PermissionMixin, ModelViewSet):
-    queryset = Question.objects.all()
+class QuestionsViewSet(PermissionMixin, ModelViewSet):
+    queryset = Questions.objects.all()
     serializer_class = QuestionSerializer
     filter_backends = [
         filters.DjangoFilterBackend,
@@ -35,8 +35,8 @@ class QuestionViewSet(PermissionMixin, ModelViewSet):
         context['action'] = self.action
         return context
 
-class AnswerViewSet(PermissionMixin, LikedMixin ,ModelViewSet):
-    queryset = Answer.objects.all()
+class AnswersViewSet(PermissionMixin, LikedMixin ,ModelViewSet):
+    queryset = Answers.objects.all()
     serializer_class = AnswerSerializer
 
     def get_serializer_context(self):
@@ -44,23 +44,23 @@ class AnswerViewSet(PermissionMixin, LikedMixin ,ModelViewSet):
         context['action'] = self.action
         context['request'] = self.request
         return context
+        
 
-class CommentViewSet(PermissionMixin, ModelViewSet):
-    queryset = Comment.objects.all()
+class CommentsViewSet(PermissionMixin, ModelViewSet):
+    queryset = Comments.objects.all()
     serializer_class = CommentSerializer
 
-class RateViewSet(ModelViewSet):
-    queryset = Rate.objects.all()
+class RatesViewSet(ModelViewSet):
+    queryset = Rates.objects.all()
     serializer_class = RateSerializer
 
-class FavoriteViewSet(ModelViewSet):
-    queryset = Favorite.objects.all()
+class FavoritesViewSet(ModelViewSet):
+    queryset = Favorites.objects.all()
     serializer_class = FavoriteSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.get_serializer_context().get('request').user
-        queryset = Favorite.objects.filter(user=user)
+        queryset = Favorites.objects.filter(user=user)
         return  queryset
-
 

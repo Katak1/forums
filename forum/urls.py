@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from body.views import QuestionViewSet, AnswerViewSet, CommentViewSet, FavoriteViewSet,RateViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import permissions
@@ -9,6 +8,8 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf.urls import url
 from Pars.views import NewsViewSet
+from bodys.views import QuestionsViewSet, AnswersViewSet, CommentsViewSet, RatesViewSet, FavoritesViewSet
+
 
 
 schema_view = get_schema_view(
@@ -25,13 +26,12 @@ schema_view = get_schema_view(
 )
 
 router = DefaultRouter()
-router.register('question', QuestionViewSet)
-router.register('answer', AnswerViewSet)
-router.register('comment', CommentViewSet)
-router.register('rate', RateViewSet)
-router.register('favorite', FavoriteViewSet)
 router.register('new', NewsViewSet)
-
+router.register('question', QuestionsViewSet)
+router.register('answer', AnswersViewSet)
+router.register('comment', CommentsViewSet)
+router.register('fav', FavoritesViewSet)
+router.register('rate', RatesViewSet)
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),

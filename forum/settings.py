@@ -7,7 +7,7 @@ env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'django-insecure-(ad(@i^7q(#wg9p!q8skq16tx+q=m-oi@rlr)1#gb7!)4vy!xz'
 
 DEBUG = True
 
@@ -23,11 +23,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Apps
     'account',
-    'body',
     'likes.apps.LikesConfig',
     'chat',
     'channels',
     'Pars',
+    'bodys',
     # lib
     'rest_framework',
     'django_filters',
@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'forum.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'forums',
+        'USER': 'alisher',
+        'PASSWORD': '1',
+        'HOST': 'localhost',
+        'PORT': '5432',
 
     }
 }
